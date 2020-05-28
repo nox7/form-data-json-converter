@@ -1,6 +1,17 @@
 class FormDataJSON{
 	constructor(formData){
 		this.formData = formData;
+		this.preparedValues = {};
+	}
+
+	/**
+	* Add a value that may already be a JSON object or other prepared data
+	* that wasn't in the original form data
+	* @param {string} key
+	* @param {mixed} value
+	*/
+	addPreparedValue(key, value){
+		this.preparedValues[key] = value;
 	}
 
 	/**
@@ -27,6 +38,10 @@ class FormDataJSON{
 			}else{
 				throw `Unknown value type. Type is  ` + typeof(value);
 			}
+		}
+
+		for (let key of Object.keys(this.preparedValues)){
+			finalObject[key] = this.preparedValues[key];
 		}
 
 		return JSON.stringify(finalObject);
