@@ -11,7 +11,7 @@ form.addEventListener("submit", async e => {
 
 	const fData = new FormData(form);
 	const fDataJSON = new FormDataJSON(fData);
-	let jsonRep = fDataJSON.getAsJSON();
+	let jsonRep = await fDataJSON.getAsJSON();
 
 	console.log(jsonRep);
 })
